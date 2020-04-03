@@ -1,0 +1,565 @@
+<% layout('/layouts/default.html', {title: '统计报告', bodyClass: ''}){ %>
+<!-- <link rel="stylesheet" href="${ctxStatic}/modules/sys/sysDesktop.css?${_version}"> -->
+<div class="content pb0">
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-car"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">当前使用车位数量</span>
+                    <span class="info-box-number">0</small></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-map-marker"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">当前剩余车位数量</span>
+                    <span class="info-box-number">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix visible-sm-block"></div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-level-up"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">今日入库总次数</span>
+                    <span class="info-box-number">0</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-level-down"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">今日出库总次数</span>
+                    <span class="info-box-number">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <section class="col-md-12 ui-sortable">
+            <div class="box box-widget">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                <ul class="nav nav-tabs pull-right">
+                                    <li class=""><a href="#chart-b-4" data-toggle="tab" aria-expanded="true">出库次数</a></li>
+                                    <li class=""><a href="#chart-b-3" data-toggle="tab" aria-expanded="true">入库次数</a></li>
+                                    <li class=""><a href="#chart-b-2" data-toggle="tab" aria-expanded="true">使用库位</a></li>
+                                    <li class="active"><a href="#chart-b-1" data-toggle="tab"
+                                                          aria-expanded="true">剩余库位</a></li>
+                                    <li class="pull-left header"><i class="fa fa-inbox"></i>比例</li>
+                                </ul>
+                                <div class="tab-content no-padding">
+                                    <div class="chart tab-pane active" id="chart-b-1">
+                                        <div id="myChart1" style="height:300px;width:100%"></div>
+                                        <script>
+                                            $(function () {
+                                                myChart_b_1 = echarts.init(document.getElementById('myChart1'), 'light');
+                                                myChart_b_1.setOption({
+                                                    tooltip: {
+                                                        trigger: 'item',
+                                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                                    },
+                                                    series: [
+                                                        {
+                                                            name: '入库数量',
+                                                            type: 'pie',
+                                                            radius: ['15%', '70%'],
+                                                            roseType: 'radius',
+                                                            avoidLabelOverlap: false,
+                                                            label: {
+                                                                normal: {
+                                                                    show: true
+                                                                },
+                                                                emphasis: {
+                                                                    show: true,
+                                                                    textStyle: {
+                                                                        fontSize: '10',
+                                                                        fontWeight: 'bold'
+                                                                    }
+                                                                }
+                                                            },
+                                                            labelLine: {
+                                                                normal: {
+                                                                    show: true
+                                                                }
+                                                            },
+                                                            data: [
+                                                                {value: 135, name: 'A库'},
+                                                                {value: 358, name: 'B库'},
+                                                                {value: 335, name: 'C库'},
+                                                                {value: 310, name: 'D库'},
+                                                                {value: 234, name: 'E库'},
+                                                                {value: 234, name: 'F库'},
+                                                            ]
+                                                        }
+                                                    ]
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="chart tab-pane" id="chart-b-2">
+                                        <div id="myChart2" style="height:300px;width:100%"></div>
+                                        <script>
+                                            $(function () {
+                                                myChart_b_2 = echarts.init(document.getElementById('myChart2'), 'light');
+                                                myChart_b_2.setOption({
+                                                    tooltip: {
+                                                        trigger: 'item',
+                                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                                    },
+                                                    series: [
+                                                        {
+                                                            name: '出库数量',
+                                                            type: 'pie',
+                                                            radius: ['15%', '70%'],
+                                                            roseType: 'radius',
+                                                            avoidLabelOverlap: false,
+                                                            label: {
+                                                                normal: {
+                                                                    show: true
+                                                                },
+                                                                emphasis: {
+                                                                    show: true,
+                                                                    textStyle: {
+                                                                        fontSize: '10',
+                                                                        fontWeight: 'bold'
+                                                                    }
+                                                                }
+                                                            },
+                                                            labelLine: {
+                                                                normal: {
+                                                                    show: true
+                                                                }
+                                                            },
+                                                            data: [
+                                                                {value: 130, name: 'A库'},
+                                                                {value: 340, name: 'B库'},
+                                                                {value: 360, name: 'C库'},
+                                                                {value: 210, name: 'D库'},
+                                                                {value: 210, name: 'E库'},
+                                                                {value: 234, name: 'F库'},
+                                                            ]
+                                                        }
+                                                    ]
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="chart tab-pane" id="chart-b-3">
+                                        <div id="myChart3" style="height:300px;width:100%"></div>
+                                        <script>
+                                            $(function () {
+                                                myChart_b_3 = echarts.init(document.getElementById('myChart3'), 'light');
+                                                myChart_b_3.setOption({
+                                                    tooltip: {
+                                                        trigger: 'item',
+                                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                                    },
+                                                    series: [
+                                                        {
+                                                            name: '入库数量',
+                                                            type: 'pie',
+                                                            radius: ['15%', '70%'],
+                                                            roseType: 'radius',
+                                                            avoidLabelOverlap: false,
+                                                            label: {
+                                                                normal: {
+                                                                    show: true
+                                                                },
+                                                                emphasis: {
+                                                                    show: true,
+                                                                    textStyle: {
+                                                                        fontSize: '10',
+                                                                        fontWeight: 'bold'
+                                                                    }
+                                                                }
+                                                            },
+                                                            labelLine: {
+                                                                normal: {
+                                                                    show: true
+                                                                }
+                                                            },
+                                                            data: [
+                                                                {value: 135, name: 'A库'},
+                                                                {value: 358, name: 'B库'},
+                                                                {value: 335, name: 'C库'},
+                                                                {value: 310, name: 'D库'},
+                                                                {value: 234, name: 'E库'},
+                                                                {value: 234, name: 'F库'},
+                                                            ]
+                                                        }
+                                                    ]
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                    <div class="chart tab-pane" id="chart-b-4">
+                                        <div id="myChart4" style="height:300px;width:100%"></div>
+                                        <script>
+                                            $(function () {
+                                                myChart_b_4 = echarts.init(document.getElementById('myChart4'), 'light');
+                                                myChart_b_4.setOption({
+                                                    tooltip: {
+                                                        trigger: 'item',
+                                                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                                                    },
+                                                    series: [
+                                                        {
+                                                            name: '出库数量',
+                                                            type: 'pie',
+                                                            radius: ['15%', '70%'],
+                                                            roseType: 'radius',
+                                                            avoidLabelOverlap: false,
+                                                            label: {
+                                                                normal: {
+                                                                    show: true
+                                                                },
+                                                                emphasis: {
+                                                                    show: true,
+                                                                    textStyle: {
+                                                                        fontSize: '10',
+                                                                        fontWeight: 'bold'
+                                                                    }
+                                                                }
+                                                            },
+                                                            labelLine: {
+                                                                normal: {
+                                                                    show: true
+                                                                }
+                                                            },
+                                                            data: [
+                                                                {value: 130, name: 'A库'},
+                                                                {value: 340, name: 'B库'},
+                                                                {value: 360, name: 'C库'},
+                                                                {value: 210, name: 'D库'},
+                                                                {value: 210, name: 'E库'},
+                                                                {value: 234, name: 'F库'},
+                                                            ]
+                                                        }
+                                                    ]
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-center">
+                                <strong>出入库统计（入库/出库）</strong>
+                            </p>
+                            <div class="progress-group">
+                                <span class="progress-text">A库</span>
+                                <span class="progress-number"><b>160</b>/200</span>
+                                <div class="progress sm">
+                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-group">
+                                <span class="progress-text">B库</span>
+                                <span class="progress-number"><b>160</b>/200</span>
+                                <div class="progress sm">
+                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-group">
+                                <span class="progress-text">C库</span>
+                                <span class="progress-number"><b>160</b>/200</span>
+                                <div class="progress sm">
+                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-group">
+                                <span class="progress-text">D库</span>
+                                <span class="progress-number"><b>160</b>/200</span>
+                                <div class="progress sm">
+                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-group">
+                                <span class="progress-text">E库</span>
+                                <span class="progress-number"><b>160</b>/200</span>
+                                <div class="progress sm">
+                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="progress-group">
+                                <span class="progress-text">F库</span>
+                                <span class="progress-number"><b>160</b>/200</span>
+                                <div class="progress sm">
+                                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-widget">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="nav-tabs-custom">
+                                <!-- Tabs within a box -->
+                                <ul id="headerList" class="nav nav-tabs pull-right">
+                                    <li class="pull-left header"><i class="fa fa-inbox"></i>月度时段出入库报告</li>
+                                </ul>
+                                <div id="contentList" class="tab-content no-padding"/>
+                                <script>
+
+                                    ul = document.getElementById('headerList');
+                                    div =document.getElementById('contentList');
+                                    for (let i = 10; i > 0; i--) {
+
+                                        var paneId = 'chart-t-' + i;
+                                        //头
+                                        let li = document.createElement('li');
+                                        if (i == 1)
+                                            li.setAttribute('class', 'active');
+                                        let a = document.createElement('a');
+                                        a.href = '#'+paneId;
+                                        a.setAttribute('data-toggle', 'tab');
+                                        a.setAttribute('aria-expanded', 'true');
+                                        a.innerText = '' + i;
+                                        li.append(a);
+                                        ul.append(li);
+
+                                        //内容
+                                        //panel
+                                        let div0 = document.createElement('div');
+                                        if (i == 1)
+                                            div0.setAttribute('class', 'chart tab-pane active');
+                                        else
+                                            div0.setAttribute('class', 'chart tab-pane');
+                                        div0.id = paneId;
+                                        //chartPanel
+                                        let div1 = document.createElement('div');
+                                        div1.setAttribute('class', 'chart');
+
+                                        //chart
+                                        let chartId = 'myChart-t-' + i;
+                                        let div2 = document.createElement('div');
+                                        div2.style.height='330px';
+                                        div2.style.width='100%';
+                                        div2.id=chartId;
+
+                                        div1.append(div2);
+                                        div0.append(div1);
+                                        div.append(div0);
+                                    }
+
+                                </script>
+                                <script>
+                                    $(function () {
+
+                                        for (let i = 10; i >0 ; i--) {
+                                            let dayList = eval('${timeList}');
+                                            let parkinList = eval('${timeParkinList}');
+                                            let parkoutList = eval('${timeParkoutList}');
+                                            let chartId = 'myChart-t-' + i;
+                                            let chart = echarts.init(document.getElementById(chartId), 'default');
+                                            chart.setOption({
+                                                title: {
+                                                    text: js.formatDate(new Date(), 'yyyy-MM')
+                                                },
+                                                tooltip: {
+                                                    trigger: 'axis'
+                                                },
+                                                legend: {
+                                                    data: ['入库', '出库']
+                                                },
+                                                toolbox: {
+                                                    show: true,
+                                                    feature: {
+                                                        mark: {show: true},
+                                                        dataView: {show: true, readOnly: false},
+                                                        magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                                                        restore: {show: true},
+                                                        saveAsImage: {show: true}
+                                                    }
+                                                },
+                                                calculable: true,
+                                                grid: {
+                                                    top: '49',
+                                                    right: '20',
+                                                    bottom: '30'
+                                                },
+                                                xAxis: [
+                                                    {
+                                                        type: 'category',
+                                                        boundaryGap: false,
+                                                        data: dayList
+                                                    }
+                                                ],
+                                                yAxis: [
+                                                    {
+                                                        type: 'value'
+                                                    }
+                                                ],
+                                                color: ['#01B468','#FF9224'],
+                                                series: [
+                                                    {
+                                                        name: '入库',
+                                                        type: 'line',
+                                                        smooth: true,
+                                                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                                                        data: parkinList
+                                                    },
+                                                    {
+                                                        name: '出库',
+                                                        type: 'line',
+                                                        smooth: true,
+                                                        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                                                        data: parkoutList
+                                                    },
+                                                ]
+                                            });
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-widget">
+                <div class="box-header with-border">
+                    <h3 class="box-title">月度日次出入库报告</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-wrench"></i></button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">导出Excel</a></li>
+                                <li><a href="#">导出Word</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">基本设置</a></li>
+                            </ul>
+                        </div>
+<!--                        <button type="button" class="btn btn-box-tool" data-widget="remove">-->
+<!--                            <i class="fa fa-times"></i>-->
+<!--                        </button>-->
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="chart">
+                            <div id="myChart_m_1" style="height:330px;width:100%"></div>
+                            <script>
+
+                                $(function () {
+
+                                    var dayList = eval('${dayList}');
+                                    var parkinList = eval('${dayParkinList}');
+                                    var parkoutList = eval('${dayParkoutList}');
+
+                                    myChart_m_1 = echarts.init(document.getElementById('myChart_m_1'), 'default');
+                                    myChart_m_1.setOption({
+                                        title: {
+                                            text: js.formatDate(new Date(), 'yyyy-MM')
+                                        },
+                                        tooltip: {
+                                            trigger: 'axis'
+                                        },
+                                        legend: {
+                                            data: ['入库', '出库']
+                                        },
+                                        toolbox: {
+                                            show: true,
+                                            feature: {
+                                                mark: {show: true},
+                                                dataView: {show: true, readOnly: false},
+                                                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                                                restore: {show: true},
+                                                saveAsImage: {show: true}
+                                            }
+                                        },
+                                        calculable: true,
+                                        grid: {
+                                            top: '49',
+                                            right: '20',
+                                            bottom: '30'
+                                        },
+                                        xAxis: [
+                                            {
+                                                type: 'category',
+                                                boundaryGap: false,
+                                                data: dayList
+                                            }
+                                        ],
+                                        yAxis: [
+                                            {
+                                                type: 'value'
+                                            }
+                                        ],
+                                        color: ['#01B468','#FF9224'],
+                                        series: [
+                                            {
+                                                name: '入库',
+                                                type: 'line',
+                                                smooth: true,
+                                                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                                                data: parkinList
+                                            },
+                                            {
+                                                name: '出库',
+                                                type: 'line',
+                                                smooth: true,
+                                                itemStyle: {normal: {areaStyle: {type: 'default'}}},
+                                                data: parkoutList
+                                            },
+                                        ]
+                                    });
+                                });
+
+                            </script>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
+<footer class="main-footer m0">
+    <div class="pull-right hidden-xs">当前版本： ${@Global.getConfig('productVersion')}</div>
+    &copy; ${@DateUtils.getYear()} ${@Global.getConfig('productName')} - Powered By <a href="http://jeesite.com">JeeSite</a>
+</footer>
+<% } %>
+<script src="${ctxStatic}/jquery/jquery-ui-sortable-1.12.1.min.js"></script>
+<script src="${ctxStatic}/echarts/4.2/echarts.min.js"></script>
+<script>
+    $(function(){
+        $(window).resize(function(){
+            var footerHeight = $('.main-footer').outerHeight() || 0;
+            var windowHeight = $(window).height();
+            $('.content').css('min-height', windowHeight - footerHeight);
+            myChart_b_1.resize();myChart_b_2.resize();myChart_b_3.resize();myChart_b_4.resize();
+            myChart_t_1.resize();myChart_t_2.resize();myChart_t_3.resize();myChart_t_4.resize();
+            myChart_m_1.resize();
+        }).resize();
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            $(window).resize();
+        });
+        $('.ui-sortable').sortable({
+            connectWith : '.ui-sortable',
+            handle      : '.box-header, .nav-tabs',
+            placeholder : 'sort-highlight',
+            forcePlaceholderSize: true,
+            zIndex : 999999
+        }).find('.box-header, .nav-tabs').css('cursor', 'move');
+    });
+</script>

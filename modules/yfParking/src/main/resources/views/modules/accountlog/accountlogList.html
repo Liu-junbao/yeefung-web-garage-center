@@ -1,0 +1,211 @@
+<% layout('/layouts/default.html', {title: '出入库记录管理', libs: ['dataGrid']}){ %>
+<div class="main-content">
+	<div class="box box-main">
+		<div class="box-header">
+			<div class="box-title">
+				<i class="fa icon-notebook"></i>${text('库 出入库记录管理')}
+			</div>
+			<div class="box-tools pull-right">
+				<a href="${ctx}/accountlog/accountlog/sum" class="btn btn-default btnTool" title="${text('统计本月出入库记录')}"><i class="fa fa-bar-chart"></i> ${text('本月统计')}</a>
+				<a href="#" class="btn btn-default" id="btnSearch" title="${text('查询')}"><i class="fa fa-filter"></i> ${text('查询')}</a>
+				<% if(hasPermi('accountlog:accountlog:edit')){ %>
+					<a href="${ctx}/accountlog/accountlog/form" class="btn btn-default btnTool" title="${text('新增出入库记录')}"><i class="fa fa-plus"></i> ${text('新增')}</a>
+				<% } %>
+			</div>
+		</div>
+		<div class="box-body">
+			<#form:form id="searchForm" model="${accountlog}" action="${ctx}/accountlog/accountlog/listData" method="post" class="form-inline hide"
+					data-page-no="${parameter.pageNo}" data-page-size="${parameter.pageSize}" data-order-by="${parameter.orderBy}">
+				<div class="form-group">
+					<label class="control-label">${text('id')}：</label>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('parkcardtrace')}：</label>
+					<div class="control-inline">
+						<#form:input path="parkcardtrace" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('cardno')}：</label>
+					<div class="control-inline">
+						<#form:input path="cardno" maxlength="10" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('parksapceid')}：</label>
+					<div class="control-inline">
+						<#form:input path="parksapceid" maxlength="10" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('carsizetype')}：</label>
+					<div class="control-inline">
+						<#form:input path="carsizetype" maxlength="10" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('carphoto')}：</label>
+					<div class="control-inline">
+						<#form:input path="carphoto" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('platenumber')}：</label>
+					<div class="control-inline">
+						<#form:input path="platenumber" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('cardintime')}：</label>
+					<div class="control-inline">
+						<#form:input path="cardintime" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('parkintime')}：</label>
+					<div class="control-inline">
+						<#form:input path="parkintime" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('cardouttime')}：</label>
+					<div class="control-inline">
+						<#form:input path="cardouttime" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('parkouttime')}：</label>
+					<div class="control-inline">
+						<#form:input path="parkouttime" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('lastaccounttime')}：</label>
+					<div class="control-inline">
+						<#form:input path="lastaccounttime" readonly="true" maxlength="20" class="form-control Wdate-datetime"
+							dataFormat="datetime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm',isShowClear:false});"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('duepay')}：</label>
+					<div class="control-inline">
+						<#form:input path="duepay" maxlength="53" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('actualpay')}：</label>
+					<div class="control-inline">
+						<#form:input path="actualpay" maxlength="53" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('paymethod')}：</label>
+					<div class="control-inline">
+						<#form:input path="paymethod" maxlength="10" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('cardtype')}：</label>
+					<div class="control-inline">
+						<#form:input path="cardtype" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('logoperator')}：</label>
+					<div class="control-inline">
+						<#form:input path="logoperator" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('garageid')}：</label>
+					<div class="control-inline">
+						<#form:input path="garageid" maxlength="10" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('remark')}：</label>
+					<div class="control-inline">
+						<#form:input path="remark" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('carmodelname')}：</label>
+					<div class="control-inline">
+						<#form:input path="carmodelname" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('inport')}：</label>
+					<div class="control-inline">
+						<#form:input path="inport" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">${text('outport')}：</label>
+					<div class="control-inline">
+						<#form:input path="outport" maxlength="-1" class="form-control width-120"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-sm">${text('查询')}</button>
+					<button type="reset" class="btn btn-default btn-sm">${text('重置')}</button>
+				</div>
+			</#form:form>
+			<table id="dataGrid"></table>
+			<div id="dataGridPage"></div>
+		</div>
+	</div>
+</div>
+<% } %>
+<script>
+// 初始化DataGrid对象
+$('#dataGrid').dataGrid({
+	searchForm: $("#searchForm"),
+	columnModel: [
+		{header:'${text("id")}', name:'id', index:'a.id', width:150, align:"left", frozen:true, formatter: function(val, obj, row, act){
+			return '<a href="${ctx}/accountlog/accountlog/form?id='+row.id+'" class="btnList" data-title="${text("编辑出入库记录")}">'+(val||row.id)+'</a>';
+		}},
+		{header:'${text("parkcardtrace")}', name:'parkcardtrace', index:'a.parkcardtrace', width:150, align:"left"},
+		{header:'${text("cardno")}', name:'cardno', index:'a.cardno', width:150, align:"center"},
+		{header:'${text("parksapceid")}', name:'parksapceid', index:'a.parksapceid', width:150, align:"center"},
+		{header:'${text("carsizetype")}', name:'carsizetype', index:'a.carsizetype', width:150, align:"center"},
+		{header:'${text("carphoto")}', name:'carphoto', index:'a.carphoto', width:150, align:"left"},
+		{header:'${text("platenumber")}', name:'platenumber', index:'a.platenumber', width:150, align:"left"},
+		{header:'${text("cardintime")}', name:'cardintime', index:'a.cardintime', width:150, align:"center"},
+		{header:'${text("parkintime")}', name:'parkintime', index:'a.parkintime', width:150, align:"center"},
+		{header:'${text("cardouttime")}', name:'cardouttime', index:'a.cardouttime', width:150, align:"center"},
+		{header:'${text("parkouttime")}', name:'parkouttime', index:'a.parkouttime', width:150, align:"center"},
+		{header:'${text("lastaccounttime")}', name:'lastaccounttime', index:'a.lastaccounttime', width:150, align:"center"},
+		{header:'${text("duepay")}', name:'duepay', index:'a.duepay', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text("actualpay")}', name:'actualpay', index:'a.actualpay', width:150, align:"right", formatter: function(val, obj, row, act){
+			return js.formatNumber(val, 2, false, ''); // 数值类型格式化 (原始数值, 小数位数, 是否千分位, 默认值，金额情况下设置0.00);
+		}},
+		{header:'${text("paymethod")}', name:'paymethod', index:'a.paymethod', width:150, align:"center"},
+		{header:'${text("cardtype")}', name:'cardtype', index:'a.cardtype', width:150, align:"left"},
+		{header:'${text("logoperator")}', name:'logoperator', index:'a.logoperator', width:150, align:"left"},
+		{header:'${text("garageid")}', name:'garageid', index:'a.garageid', width:150, align:"center"},
+		{header:'${text("remark")}', name:'remark', index:'a.remark', width:150, align:"left"},
+		{header:'${text("carmodelname")}', name:'carmodelname', index:'a.carmodelname', width:150, align:"left"},
+		{header:'${text("inport")}', name:'inport', index:'a.inport', width:150, align:"left"},
+		{header:'${text("outport")}', name:'outport', index:'a.outport', width:150, align:"left"},
+		{header:'${text("操作")}', name:'actions', width:120, sortable:false, title:false, formatter: function(val, obj, row, act){
+			var actions = [];
+			<% if(hasPermi('accountlog:accountlog:edit')){ %>
+				actions.push('<a href="${ctx}/accountlog/accountlog/form?id='+row.id+'" class="btnList" title="${text("编辑出入库记录")}"><i class="fa fa-pencil"></i></a>&nbsp;');
+				actions.push('<a href="${ctx}/accountlog/accountlog/delete?id='+row.id+'" class="btnList" title="${text("删除出入库记录")}" data-confirm="${text("确认要删除该出入库记录吗？")}"><i class="fa fa-trash-o"></i></a>&nbsp;');
+			<% } %>
+			return actions.join('');
+		}}
+	],
+	// 加载成功后执行事件
+	ajaxSuccess: function(data){
+		
+	}
+});
+</script>
