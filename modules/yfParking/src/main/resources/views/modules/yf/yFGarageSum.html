@@ -315,8 +315,11 @@
                                 <div id="contentList" class="tab-content no-padding"/>
                                 <script>
 
+
+
+
                                     ul = document.getElementById('headerList');
-                                    div =document.getElementById('contentList');
+                                    div = document.getElementById('contentList');
                                     for (let i = 10; i > 0; i--) {
 
                                         var paneId = 'chart-t-' + i;
@@ -325,10 +328,12 @@
                                         if (i == 1)
                                             li.setAttribute('class', 'active');
                                         let a = document.createElement('a');
-                                        a.href = '#'+paneId;
-                                        a.setAttribute('data-toggle', 'tab');
-                                        a.setAttribute('aria-expanded', 'true');
-                                        a.innerText = '' + i;
+                                        $(a).attr({
+                                            "href":'#'+paneId,
+                                            "data-toggle":"tab",
+                                            "aria-expanded":"true",
+                                            "innerText":""+i
+                                        });
                                         li.append(a);
                                         ul.append(li);
 
@@ -340,21 +345,33 @@
                                         else
                                             div0.setAttribute('class', 'chart tab-pane');
                                         div0.id = paneId;
-                                        //chartPanel
-                                        let div1 = document.createElement('div');
-                                        div1.setAttribute('class', 'chart');
 
                                         //chart
                                         let chartId = 'myChart-t-' + i;
                                         let div2 = document.createElement('div');
-                                        div2.style.height='330px';
-                                        div2.style.width='100%';
-                                        div2.id=chartId;
+                                        $(div2)
+                                            .attr("id",chartId)
+                                            .css({
+                                            "height":"330px",
+                                            "width":"100%"
+                                        });
+
+                                        //chartPanel
+                                        let div1 = document.createElement('div');
+                                        $(div1).setAttribute('class', 'chart');
+
 
                                         div1.append(div2);
                                         div0.append(div1);
                                         div.append(div0);
                                     }
+
+
+function getTemplate() {
+
+}
+
+
 
                                 </script>
                                 <script>
